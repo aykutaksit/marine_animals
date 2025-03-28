@@ -243,10 +243,46 @@ def add_header(response):
 @app.route('/static/sounds/<path:filename>')
 def serve_sound(filename):
     try:
-        return send_from_directory('static/sounds', filename, mimetype='audio/wav')
+        # Get absolute path to the sounds directory
+        sounds_dir = os.path.join(app.root_path, 'static', 'sounds')
+        file_path = os.path.join(sounds_dir, filename)
+        
+        # Log the paths for debugging
+        print(f"Attempting to serve sound file: {filename}")
+        print(f"Looking in directory: {sounds_dir}")
+        print(f"Full file path: {file_path}")
+        print(f"File exists: {os.path.exists(file_path)}")
+        
+        if not os.path.exists(file_path):
+            print(f"File not found at path: {file_path}")
+            return jsonify({'error': 'Sound file not found'}), 404
+            
+        # Get file size
+        file_size = os.path.getsize(file_path)
+        print(f"File size: {file_size} bytes")
+        
+        # Serve the file with specific headers
+        response = send_from_directory(
+            sounds_dir,
+            filename,
+            mimetype='audio/wav',
+            as_attachment=False,
+            conditional=True
+        )
+        
+        # Add headers to prevent caching issues
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        
+        return response
+        
     except Exception as e:
         print(f"Error serving sound file {filename}: {str(e)}")
-        return jsonify({'error': 'Sound file not found'}), 404
+        print(f"Exception type: {type(e)}")
+        import traceback
+        print(f"Traceback: {traceback.format_exc()}")
+        return jsonify({'error': str(e)}), 404
 
 if __name__ == '__main__':
     app.run(debug=True) 
