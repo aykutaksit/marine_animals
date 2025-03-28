@@ -1,0 +1,112 @@
+{
+  "mysticetes": [
+    {
+      "common_name": "Blue Whale",
+      "scientific_name": "Balaenoptera musculus",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Fin Whale",
+      "scientific_name": "Balaenoptera physalus",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Humpback Whale",
+      "scientific_name": "Megaptera novaeangliae",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Minke Whale",
+      "scientific_name": "Balaenoptera acutorostrata",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Right Whale",
+      "scientific_name": "Eubalaena glacialis",
+      "audio_urls": [
+        "https://www.fisheries.noaa.gov/s3/2023-04/Eugl-multisound-NOAA-PAGroup-01-right-whale-clip.mp3"
+      ]
+    },
+    {
+      "common_name": "Sei Whale",
+      "scientific_name": "Balaenoptera borealis",
+      "audio_urls": []
+    }
+  ],
+  "odontocetes": [
+    {
+      "common_name": "Bottlenose Dolphin",
+      "scientific_name": "Tursiops truncatus",
+      "audio_urls": [
+        "https://www.fisheries.noaa.gov/s3/2023-04/Tutr-multisound-NOAA-PAGroup-03-bottlenose-dolphin-clip.mp3"
+      ]
+    },
+    {
+      "common_name": "Beluga Whale",
+      "scientific_name": "Delphinapterus leucas",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Killer Whale",
+      "scientific_name": "Orcinus orca",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Spotted Dolphin",
+      "scientific_name": "Stenella frontalis",
+      "audio_urls": []
+    },
+    {
+      "common_name": "White Sided Dolphin",
+      "scientific_name": "Lagenorhynchus acutus",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Beaked Whale",
+      "scientific_name": "Ziphius cavirostris",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Harbor Porpoise",
+      "scientific_name": "Phocoena phocoena",
+      "audio_urls": []
+    }
+  ],
+  "pinnipeds": [
+    {
+      "common_name": "Harbor Seal",
+      "scientific_name": "Phoca vitulina",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Sea Lion",
+      "scientific_name": "Zalophus californianus",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Gray Seal",
+      "scientific_name": "Halichoerus grypus",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Harp Seal",
+      "scientific_name": "Pagophilus groenlandicus",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Bearded Seal",
+      "scientific_name": "Erignathus barbatus",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Crabeater Seal",
+      "scientific_name": "Lobodon carcinophaga",
+      "audio_urls": []
+    },
+    {
+      "common_name": "Walrus",
+      "scientific_name": "Odobenus rosmarus",
+      "audio_urls": []
+    }
+  ]
+}

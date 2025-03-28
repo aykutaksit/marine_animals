@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby's First Marine Animal Sounds 🐋</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 50%, #80DEEA 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .ocean-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 15s infinite linear;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.2;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1a5f7a;
+            font-size: 2.5em;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .animal-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            max-width: 500px;
+            transition: transform 0.3s ease;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .animal-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .animal-name {
+            font-size: 2em;
+            color: #1a5f7a;
+            margin: 15px 0;
+        }
+
+        .animal-description {
+            font-size: 1.2em;
+            color: #666;
+            margin: 15px 0;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background-color: #1a5f7a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            background-color: #134960;
+            transform: scale(1.05);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .play-button {
+            background-color: #4CAF50;
+        }
+
+        .record-button {
+            background-color: #f44336;
+        }
+
+        .random-button {
+            background-color: #9C27B0;
+            font-size: 1.2em;
+            padding: 15px 30px;
+        }
+
+        audio {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 25px;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .score {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #1a5f7a;
+            margin-bottom: 10px;
+        }
+
+        .recording-pulse {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            color: #f44336;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+
+        .recording-playback {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+        }
+
+        .recording-playback h3 {
+            color: #1a5f7a;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ocean-bg" id="ocean-bg"></div>
+    <div class="container">
+        <h1>Baby's First Marine Animal Sounds 🐋</h1>
+        <button class="random-button" onclick="getRandomAnimal()">Get Random Animal 🎲</button>
+        
+        <div class="animal-card" id="animal-card" style="display: none;">
+            <img src="" alt="" class="animal-image" id="animal-image" onerror="this.style.display='none'">
+            <h2 class="animal-name" id="animal-name"></h2>
+            <p class="animal-description" id="animal-description"></p>
+            <div class="button-container">
+                <button class="play-button" onclick="playSound()">Play Sound 🔊</button>
+                <button class="record-button" onclick="startRecording()" id="start-recording">Start Recording 🎙️</button>
+                <button class="record-button" onclick="stopRecording()" id="stop-recording" disabled>Stop Recording ⏹️</button>
+            </div>
+            <div id="recording-status" class="recording-pulse" style="display: none;">
+                Recording... 🎙️
+            </div>
+            <div id="feedback" class="feedback" style="display: none;">
+                <div class="score"></div>
+                <div class="message"></div>
+            </div>
+            <div id="recording-playback" class="recording-playback" style="display: none;">
+                <h3>Your Recording:</h3>
+                <audio controls></audio>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentAnimal = null;
+        let mediaRecorder = null;
+        let audioChunks = [];
+        const marineIcons = ['🐋', '🐬', '🐳', '🦭', '🐟', '🦐', '🐠', '🦈', '🐙', '🦑', '🐡', '🦀'];
+
+        function createFloatingIcons() {
+            const oceanBg = document.getElementById('ocean-bg');
+            for (let i = 0; i < 20; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'floating-icon';
+                icon.textContent = marineIcons[Math.floor(Math.random() * marineIcons.length)];
+                icon.style.left = `${Math.random() * 100}vw`;
+                icon.style.animationDelay = `${Math.random() * 10}s`;
+                oceanBg.appendChild(icon);
+            }
+        }
+
+        createFloatingIcons();
+
+        async function getRandomAnimal() {
+            try {
+                const response = await fetch('/get_random_animal');
+                const animal = await response.json();
+                currentAnimal = animal;
+                
+                document.getElementById('animal-card').style.display = 'block';
+                
+                // Handle image loading with error handling
+                const imageElement = document.getElementById('animal-image');
+                const imagePath = `/static/images/${animal.image_file}`;
+                imageElement.src = imagePath;
+                imageElement.alt = animal.animal;
+                imageElement.style.display = 'block'; // Reset display style
+                
+                imageElement.onerror = function() {
+                    console.error(`Failed to load image: ${imagePath}`);
+                    this.style.display = 'none';
+                };
+                
+                document.getElementById('animal-name').textContent = animal.animal;
+                document.getElementById('animal-description').textContent = `Category: ${animal.category}`;
+                
+                // Reset feedback and recording playback
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('recording-playback').style.display = 'none';
+            } catch (error) {
+                console.error('Error getting random animal:', error);
+            }
+        }
+
+        function playSound() {
+            const audio = new Audio(`/static/sounds/${currentAnimal.sound_file}`);
+            audio.play();
+        }
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+
+                mediaRecorder.ondataavailable = (event) => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.start();
+                document.getElementById('start-recording').disabled = true;
+                document.getElementById('stop-recording').disabled = false;
+                document.getElementById('recording-status').style.display = 'block';
+            } catch (error) {
+                console.error('Error accessing microphone:', error);
+            }
+        }
+
+        async function stopRecording() {
+            if (!mediaRecorder) return;
+
+            mediaRecorder.stop();
+            document.getElementById('start-recording').disabled = false;
+            document.getElementById('stop-recording').disabled = true;
+            document.getElementById('recording-status').style.display = 'none';
+
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                
+                // Show recording playback
+                const playbackDiv = document.getElementById('recording-playback');
+                playbackDiv.style.display = 'block';
+                playbackDiv.querySelector('audio').src = audioUrl;
+
+                // Send recording for analysis
+                const formData = new FormData();
+                formData.append('audio', audioBlob);
+                formData.append('animal', currentAnimal.animal);
+
+                try {
+                    const response = await fetch('/api/analyze_recording', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const result = await response.json();
+                    
+                    // Show feedback
+                    const feedbackDiv = document.getElementById('feedback');
+                    feedbackDiv.style.display = 'block';
+                    feedbackDiv.querySelector('.score').textContent = `Score: ${result.score}%`;
+                    feedbackDiv.querySelector('.message').textContent = result.feedback;
+                } catch (error) {
+                    console.error('Error analyzing recording:', error);
+                }
+            };
+        }
+    </script>
+</body>
+</html> 
