@@ -101,7 +101,7 @@ def analyze_audio(original_path, user_path):
         
         # Make scoring even stricter by applying a penalty for any significant differences
         if pitch_diff > 20 or rhythm_diff > 0.5 or energy_diff > 0.3:
-            final_score *= 0.8  # 20% penalty for significant differences
+            final_score *= 1  # 20% penalty for significant differences
         
         # Generate feedback based on score
         if final_score >= 90:
