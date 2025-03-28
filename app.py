@@ -242,7 +242,17 @@ def add_header(response):
 # Ensure static files are served with correct MIME types
 @app.route('/static/sounds/<path:filename>')
 def serve_sound(filename):
-    return send_from_directory('static/sounds', filename, mimetype='audio/wav')
+    try:
+        return send_from_directory(
+            'static/sounds',
+            filename,
+            mimetype='audio/wav',
+            as_attachment=False,
+            conditional=True
+        )
+    except Exception as e:
+        print(f"Error serving sound file {filename}: {str(e)}")
+        return jsonify({'error': 'Sound file not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True) 
