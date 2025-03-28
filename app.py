@@ -71,7 +71,8 @@ MARINE_ANIMALS = {
     },
     'Ringed Seal': {
         'category': 'Mammal',
-        'description': 'Ringed seals produce a variety of vocalizations including growls, grunts, and whistles. They use these sounds for communication, especially during breeding season.'
+        'description': 'Ringed seals produce a variety of vocalizations including growls, grunts, and whistles. They use these sounds for communication, especially during breeding season.',
+        'sound_file': 'processed_ringed_seal.wav'
     },
     'Walrus': {
         'category': 'Mammal',
