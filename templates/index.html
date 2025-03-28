@@ -281,24 +281,32 @@
         function playSound() {
             const soundPath = `/static/sounds/${currentAnimal.sound_file}`;
             console.log('Attempting to play sound:', soundPath);
-            const audio = new Audio();
             
-            // Set the audio source with type
-            audio.src = soundPath;
-            audio.type = 'audio/wav';
+            // Create a hidden audio element
+            const audioElement = document.createElement('audio');
+            audioElement.style.display = 'none';
+            document.body.appendChild(audioElement);
             
-            audio.onerror = function(e) {
+            // Set up event listeners
+            audioElement.addEventListener('error', function(e) {
                 console.error('Error loading sound:', e);
                 console.error('Sound path:', soundPath);
-                console.error('Audio element:', audio);
-            };
+                document.body.removeChild(audioElement);
+            });
             
-            audio.oncanplaythrough = function() {
+            audioElement.addEventListener('canplaythrough', function() {
                 console.log('Sound loaded successfully');
-            };
+            });
             
-            audio.play().catch(function(error) {
+            audioElement.addEventListener('ended', function() {
+                document.body.removeChild(audioElement);
+            });
+            
+            // Set the source and play
+            audioElement.src = soundPath;
+            audioElement.play().catch(function(error) {
                 console.error('Error playing sound:', error);
+                document.body.removeChild(audioElement);
             });
         }
 
