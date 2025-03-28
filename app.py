@@ -73,6 +73,11 @@ MARINE_ANIMALS = {
         'category': 'Mammal',
         'description': 'Ringed seals produce a variety of vocalizations including growls, grunts, and whistles. They use these sounds for communication, especially during breeding season.'
     },
+    'Walrus': {
+        'category': 'Mammal',
+        'description': 'Walruses produce a variety of sounds including bell-like sounds, grunts, and whistles. They are known for their distinctive "bell" calls during breeding season.',
+        'sound_file': 'processed_walrus.wav'
+    },
     'Manatee': {
         'category': 'Mammal',
         'description': 'Manatees produce squeaks, squeals, and chirps for communication. They are social animals and use these sounds to maintain contact with other manatees.'
@@ -239,46 +244,10 @@ def add_header(response):
 @app.route('/static/sounds/<path:filename>')
 def serve_sound(filename):
     try:
-        # Get absolute path to the sounds directory
-        sounds_dir = os.path.join(app.root_path, 'static', 'sounds')
-        file_path = os.path.join(sounds_dir, filename)
-        
-        # Log the paths for debugging
-        print(f"Attempting to serve sound file: {filename}")
-        print(f"Looking in directory: {sounds_dir}")
-        print(f"Full file path: {file_path}")
-        print(f"File exists: {os.path.exists(file_path)}")
-        
-        if not os.path.exists(file_path):
-            print(f"File not found at path: {file_path}")
-            return jsonify({'error': 'Sound file not found'}), 404
-            
-        # Get file size
-        file_size = os.path.getsize(file_path)
-        print(f"File size: {file_size} bytes")
-        
-        # Serve the file with specific headers
-        response = send_from_directory(
-            sounds_dir,
-            filename,
-            mimetype='audio/wav',
-            as_attachment=False,
-            conditional=True
-        )
-        
-        # Add headers to prevent caching issues
-        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-        response.headers['Pragma'] = 'no-cache'
-        response.headers['Expires'] = '0'
-        
-        return response
-        
+        return send_from_directory('static/sounds', filename, mimetype='audio/wav')
     except Exception as e:
         print(f"Error serving sound file {filename}: {str(e)}")
-        print(f"Exception type: {type(e)}")
-        import traceback
-        print(f"Traceback: {traceback.format_exc()}")
-        return jsonify({'error': str(e)}), 404
+        return jsonify({'error': 'Sound file not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True) 

@@ -1,12 +1,9 @@
 bind = "0.0.0.0:10000"
-workers = 4
-threads = 2
+workers = 2
+threads = 4
 timeout = 120
-keepalive = 5
 max_requests = 1000
 max_requests_jitter = 50
 worker_class = 'sync'
 worker_connections = 1000
-limit_request_line = 0
-limit_request_fields = 0
-limit_request_field_size = 0 
+keepalive = 5 
