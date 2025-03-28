@@ -73,10 +73,6 @@ MARINE_ANIMALS = {
         'category': 'Mammal',
         'description': 'Ringed seals produce a variety of vocalizations including growls, grunts, and whistles. They use these sounds for communication, especially during breeding season.'
     },
-    'Walrus': {
-        'category': 'Mammal',
-        'description': 'Walruses produce a variety of sounds including bell-like sounds, grunts, and whistles. They are known for their distinctive "bell" calls during breeding season.'
-    },
     'Manatee': {
         'category': 'Mammal',
         'description': 'Manatees produce squeaks, squeals, and chirps for communication. They are social animals and use these sounds to maintain contact with other manatees.'
