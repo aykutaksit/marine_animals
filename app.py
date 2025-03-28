@@ -243,7 +243,7 @@ def add_header(response):
 @app.route('/static/sounds/<path:filename>')
 def serve_sound(filename):
     try:
-        return send_from_directory('static/sounds/processed', filename, mimetype='audio/wav')
+        return send_from_directory('static/sounds', filename, mimetype='audio/wav')
     except Exception as e:
         print(f"Error serving sound file {filename}: {str(e)}")
         return jsonify({'error': 'Sound file not found'}), 404
