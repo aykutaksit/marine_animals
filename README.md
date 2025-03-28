@@ -1,62 +1,65 @@
-# Marine Animal Sound and Image Library
+# Marine Animal Sounds 🐋
 
-This project contains a collection of marine animal sounds and images, organized for educational and research purposes.
-
-## Project Structure
-
-```
-.
-├── static/
-│   ├── images/          # Marine animal images
-│   └── sounds/          # Marine animal sound files
-│       └── processed/   # 5-second processed sound files
-├── download_images.py   # Script to download marine animal images
-├── download_sounds.py   # Script to download marine animal sounds
-└── process_sounds.py    # Script to process sound files to 5 seconds
-```
+An interactive web application that teaches children about marine animals through their sounds and images.
 
 ## Features
 
-- Collection of marine animal images from various sources
-- High-quality sound recordings of marine animals
-- All sound files are processed to be exactly 5 seconds long
-- Automated scripts for downloading and processing media files
+- Random marine animal selection
+- High-quality animal images
+- Authentic animal sounds
+- Recording and playback functionality
+- Beautiful, child-friendly interface
+- Educational descriptions of each animal
 
-## Requirements
+## Local Development
 
-- Python 3.x
-- Required Python packages:
-  - requests
-  - beautifulsoup4
-  - selenium
-  - webdriver_manager
-  - pydub
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/marine_animals.git
+cd marine_animals
+```
 
-## Usage
+2. Create and activate a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-1. Install required packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-2. Download images:
-   ```bash
-   python download_images.py
-   ```
+4. Run the application:
+```bash
+python app.py
+```
 
-3. Download sounds:
-   ```bash
-   python download_sounds.py
-   ```
+5. Open your browser and visit `http://localhost:5000`
 
-4. Process sounds to 5 seconds:
-   ```bash
-   python process_sounds.py
-   ```
+## Deployment
 
-## Notes
+This project is configured for deployment on Render.com:
 
-- All sound files are processed to be exactly 5 seconds long
-- Images are downloaded from various sources including OCR and Pixabay
-- Sound files are downloaded from OCR's sound library
-- The project maintains a clean and organized structure for easy access to media files 
+1. Create a Render.com account
+2. Connect your GitHub repository
+3. Create a new Web Service
+4. Select the repository
+5. Use the following settings:
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `gunicorn app:app`
+   - Python Version: 3.9.0
+
+The application will be automatically deployed and available at your Render.com URL.
+
+## Technologies Used
+
+- Python/Flask
+- HTML5/CSS3
+- JavaScript
+- Web Audio API
+- Gunicorn
+
+## License
+
+MIT License 

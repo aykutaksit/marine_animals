@@ -95,11 +95,12 @@
         }
 
         .animal-description {
-            font-size: 1.2em;
-            color: #666;
+            font-size: 1.1em;
+            color: #444;
             margin: 15px 0;
-            line-height: 1.5;
-            font-style: italic;
+            line-height: 1.6;
+            padding: 0 20px;
+            text-align: left;
         }
 
         .button-container {
@@ -267,7 +268,7 @@
                 };
                 
                 document.getElementById('animal-name').textContent = animal.animal;
-                document.getElementById('animal-description').textContent = `Category: ${animal.category}`;
+                document.getElementById('animal-description').textContent = animal.description;
                 
                 // Reset feedback and recording playback
                 document.getElementById('feedback').style.display = 'none';

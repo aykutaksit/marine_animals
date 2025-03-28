@@ -10,4 +10,5 @@ Werkzeug==3.0.1
 pydub>=0.25.1
 ffmpeg-python==0.2.0
 selenium>=4.16.0
-webdriver-manager>=4.0.1 
+webdriver-manager>=4.0.1
+gunicorn==21.2.0 

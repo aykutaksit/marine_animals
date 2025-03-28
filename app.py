@@ -7,35 +7,116 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Dictionary mapping animal names to their categories
+# Dictionary mapping animal names to their categories and descriptions
 MARINE_ANIMALS = {
-    'Dolphin': 'Mammal',
-    'Beluga': 'Mammal',
-    'Orca': 'Mammal',
-    'Humpback Whale': 'Mammal',
-    'Harbor Seal': 'Mammal',
-    'Right Whale': 'Mammal',
-    'Gray Whale': 'Mammal',
-    'Sperm Whale': 'Mammal',
-    'Minke Whale': 'Mammal',
-    'Pilot Whale': 'Mammal',
-    'Rissos Dolphin': 'Mammal',
-    'Cuviers Beaked Whale': 'Mammal',
-    'Leopard Seal': 'Mammal',
-    'Weddell Seal': 'Mammal',
-    'Bearded Seal': 'Mammal',
-    'Ringed Seal': 'Mammal',
-    'Walrus': 'Mammal',
-    'Manatee': 'Mammal',
-    'Snapping Shrimp': 'Crustacean',
-    'Atlantic Croaker': 'Fish',
-    'Barred Grunt': 'Fish',
-    'Black Drum': 'Fish',
-    'Oyster Toadfish': 'Fish',
-    'Perch': 'Fish',
-    'Scalyfin Corvina': 'Fish',
-    'Midshipman': 'Fish',
-    'Bar Jack': 'Fish'
+    'Dolphin': {
+        'category': 'Mammal',
+        'description': 'Dolphins are known for their high-pitched whistles and clicks. They use echolocation to navigate and hunt, producing rapid clicking sounds that bounce off objects and return to them.'
+    },
+    'Beluga': {
+        'category': 'Mammal',
+        'description': 'Beluga whales are often called "canaries of the sea" due to their wide range of vocalizations. They produce whistles, clicks, and chirps, and can even mimic human speech patterns.'
+    },
+    'Orca': {
+        'category': 'Mammal',
+        'description': 'Orcas, also known as killer whales, produce a variety of sounds including whistles, clicks, and pulsed calls. Each pod has its own unique dialect of calls.'
+    },
+    'Humpback Whale': {
+        'category': 'Mammal',
+        'description': 'Humpback whales are famous for their complex songs, which can last for 20 minutes and be heard for miles. Males sing these songs during breeding season to attract mates.'
+    },
+    'Harbor Seal': {
+        'category': 'Mammal',
+        'description': 'Harbor seals produce a variety of vocalizations including growls, grunts, and barks. They are most vocal during breeding season and when communicating with their pups.'
+    },
+    'Right Whale': {
+        'category': 'Mammal',
+        'description': 'Right whales produce low-frequency moans and groans that can travel long distances underwater. They use these sounds for communication and navigation.'
+    },
+    'Gray Whale': {
+        'category': 'Mammal',
+        'description': 'Gray whales produce low-frequency moans and grunts. They are known for their distinctive "knocks" and "bongs" which they use for communication during migration.'
+    },
+    'Sperm Whale': {
+        'category': 'Mammal',
+        'description': 'Sperm whales produce the loudest sounds of any animal on Earth - powerful clicks that can reach 230 decibels. They use these clicks for echolocation and communication.'
+    },
+    'Minke Whale': {
+        'category': 'Mammal',
+        'description': 'Minke whales produce a variety of sounds including low-frequency moans and high-frequency clicks. They are known for their "boing" sound, which is unique to this species.'
+    },
+    'Pilot Whale': {
+        'category': 'Mammal',
+        'description': 'Pilot whales produce whistles and clicks for communication and echolocation. They are highly social animals and maintain strong family bonds through vocal communication.'
+    },
+    'Rissos Dolphin': {
+        'category': 'Mammal',
+        'description': 'Rissos dolphins produce a variety of sounds including whistles, clicks, and burst-pulse sounds. They use these sounds for communication and navigation in deep waters.'
+    },
+    'Cuviers Beaked Whale': {
+        'category': 'Mammal',
+        'description': 'Cuviers beaked whales produce distinctive echolocation clicks and whistles. They are deep divers and use their clicks to navigate and hunt in the deep ocean.'
+    },
+    'Leopard Seal': {
+        'category': 'Mammal',
+        'description': 'Leopard seals produce a variety of vocalizations including growls, grunts, and trills. They are known for their haunting underwater calls during breeding season.'
+    },
+    'Weddell Seal': {
+        'category': 'Mammal',
+        'description': 'Weddell seals produce a wide range of sounds including whistles, trills, and chirps. They are known for their complex underwater songs during breeding season.'
+    },
+    'Bearded Seal': {
+        'category': 'Mammal',
+        'description': 'Bearded seals are known for their distinctive "trill" calls, which sound like descending whistles. Males produce these calls during breeding season to attract mates.'
+    },
+    'Ringed Seal': {
+        'category': 'Mammal',
+        'description': 'Ringed seals produce a variety of vocalizations including growls, grunts, and whistles. They use these sounds for communication, especially during breeding season.'
+    },
+    'Walrus': {
+        'category': 'Mammal',
+        'description': 'Walruses produce a variety of sounds including bell-like sounds, grunts, and whistles. They are known for their distinctive "bell" calls during breeding season.'
+    },
+    'Manatee': {
+        'category': 'Mammal',
+        'description': 'Manatees produce squeaks, squeals, and chirps for communication. They are social animals and use these sounds to maintain contact with other manatees.'
+    },
+    'Snapping Shrimp': {
+        'category': 'Crustacean',
+        'description': 'Snapping shrimp produce loud snapping sounds by rapidly closing their claws. These snaps create cavitation bubbles and are one of the loudest sounds in the ocean.'
+    },
+    'Atlantic Croaker': {
+        'category': 'Fish',
+        'description': 'Atlantic croakers produce a distinctive "croaking" sound by vibrating their swim bladder. They are most vocal during breeding season.'
+    },
+    'Barred Grunt': {
+        'category': 'Fish',
+        'description': 'Barred grunts produce grunting sounds by grinding their teeth together. These sounds are used for communication and territorial defense.'
+    },
+    'Black Drum': {
+        'category': 'Fish',
+        'description': 'Black drums produce a deep drumming sound by vibrating their swim bladder. They are known for their distinctive "drumming" calls during breeding season.'
+    },
+    'Oyster Toadfish': {
+        'category': 'Fish',
+        'description': 'Oyster toadfish produce a distinctive "boat whistle" sound during breeding season. Males use these sounds to attract females to their nests.'
+    },
+    'Perch': {
+        'category': 'Fish',
+        'description': 'Perch produce a variety of sounds including grunts and clicks. They use these sounds for communication and territorial defense.'
+    },
+    'Scalyfin Corvina': {
+        'category': 'Fish',
+        'description': 'Scalyfin corvina produce a distinctive "drumming" sound during breeding season. They gather in large schools and create a chorus of sounds.'
+    },
+    'Midshipman': {
+        'category': 'Fish',
+        'description': 'Midshipman fish are known for their "humming" sounds during breeding season. Males produce these sounds to attract females to their nests.'
+    },
+    'Bar Jack': {
+        'category': 'Fish',
+        'description': 'Bar jacks produce a variety of sounds including grunts and clicks. They use these sounds for communication and maintaining school cohesion.'
+    }
 }
 
 def clean_filename(name):
@@ -71,10 +152,11 @@ def get_random_animal():
         return jsonify({'error': 'No animals with images available'}), 500
     
     animal = random.choice(available_animals)
-    category = MARINE_ANIMALS[animal]
+    animal_info = MARINE_ANIMALS[animal]
     return jsonify({
         'animal': animal,
-        'category': category,
+        'category': animal_info['category'],
+        'description': animal_info['description'],
         'sound_file': f'processed_{clean_filename(animal)}.wav',
         'image_file': f'{clean_filename(animal)}.jpg'
     })
