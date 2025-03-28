@@ -1,11 +1,11 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory
 import os
 import random
 import soundfile as sf
 import numpy as np
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 
 # Dictionary mapping animal names to their categories and descriptions
 MARINE_ANIMALS = {
@@ -230,6 +230,19 @@ def analyze_recording():
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+# Add CORS headers for static files
+@app.after_request
+def add_header(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return response
+
+# Ensure static files are served with correct MIME types
+@app.route('/static/sounds/<path:filename>')
+def serve_sound(filename):
+    return send_from_directory('static/sounds', filename, mimetype='audio/wav')
 
 if __name__ == '__main__':
     app.run(debug=True) 

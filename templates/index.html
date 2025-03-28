@@ -279,8 +279,22 @@
         }
 
         function playSound() {
-            const audio = new Audio(`/static/sounds/${currentAnimal.sound_file}`);
-            audio.play();
+            const soundPath = `/static/sounds/${currentAnimal.sound_file}`;
+            console.log('Attempting to play sound:', soundPath);
+            const audio = new Audio(soundPath);
+            
+            audio.onerror = function(e) {
+                console.error('Error loading sound:', e);
+                console.error('Sound path:', soundPath);
+            };
+            
+            audio.oncanplaythrough = function() {
+                console.log('Sound loaded successfully');
+            };
+            
+            audio.play().catch(function(error) {
+                console.error('Error playing sound:', error);
+            });
         }
 
         async function startRecording() {
