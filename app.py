@@ -219,9 +219,15 @@ def analyze_recording():
         if not target_animal:
             return jsonify({'error': 'No target animal specified'}), 400
         
-        # For now, we'll just return a simple score based on the audio file size
-        # In a real implementation, you would do actual audio analysis here
-        file_size = len(audio_file.read())
+        # Read the audio file data
+        audio_data = audio_file.read()
+        file_size = len(audio_data)
+        
+        # Implement a more robust scoring mechanism
+        if file_size == 0:
+            return jsonify({'score': 0, 'feedback': "No audio data provided."}), 400
+        
+        # Example scoring logic based on file size
         score = min(100, int(file_size / 1000))  # Simple scoring based on file size
         
         feedback = "Great job!" if score > 80 else "Try again!" if score > 50 else "Keep practicing!"
